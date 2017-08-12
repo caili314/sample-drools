@@ -1,0 +1,16 @@
+---
+name: 会员升级 777->rate3
+salience: -3
+oldGrade: 777
+newGrade: rate3
+conditionPeriod: 60
+conditionName: 消费额
+conditionValue: 50
+---
+name: 会员升级 777->rate4
+salience: -4
+oldGrade: 777
+newGrade: rate4
+conditionPeriod: 60
+conditionName: 消费额
+conditionValue: 100

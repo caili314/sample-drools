@@ -1,0 +1,26 @@
+//created on: 2017-8-5
+package rules
+
+//list any import classes here.
+import rules.mbrgrade.model.*;
+
+//declare any global variables here
+
+rule "等级升级规则：777->rate4"
+when 
+	$mbr: Mbr(grade=="777", $mbrId:id) 
+	MbrBehavior(mbrId==$mbrId, consumeTotal["60"] >= 100) 
+then
+	$mbr.setGrade("rate4");
+	$mbr.addRuleApplied(drools.getRule().getName());
+end
+
+
+rule "等级升级规则：rate4->rate5"
+when
+	$mbr: Mbr(grade=="rate4", $mbrId:id)
+	MbrBehavior(mbrId==$mbrId, consumeTotal["60"] >= 200)
+then
+	$mbr.setGrade("rate5");
+	$mbr.addRuleApplied(drools.getRule().getName());
+end
