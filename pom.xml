@@ -2,31 +2,23 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.caili314.samples</groupId>
-	<artifactId>TestDrools</artifactId>
+	<artifactId>sample-drools</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<properties>
-		<!-- <maven.test.skip>true</maven.test.skip> -->
-
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
 		<java.version>1.8</java.version>
+		<jbpm.version>7.1.0.Final</jbpm.version>
 		<logback.version>1.1.11</logback.version>
 		<lombok.version>1.16.16</lombok.version>
-		<commons-text.version>1.1</commons-text.version>
 		<junit.version>4.12</junit.version>
-
-		<drools.version>6.4.0.Final</drools.version>
-
-		<jackson-dataformat-yaml.version>2.9.0</jackson-dataformat-yaml.version>
-		<jackson-databind.version>2.9.0</jackson-databind.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>drools-compiler</artifactId>
-			<version>${drools.version}</version>
+			<groupId>org.jbpm</groupId>
+			<artifactId>jbpm-bpmn2</artifactId>
+			<version>${jbpm.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
@@ -39,27 +31,9 @@
 			<version>${lombok.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-text</artifactId>
-			<version>${commons-text.version}</version>
-		</dependency>
-
-		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.dataformat</groupId>
-			<artifactId>jackson-dataformat-yaml</artifactId>
-			<version>${jackson-dataformat-yaml.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>${jackson-databind.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -78,49 +52,4 @@
 		</plugins>
 	</build>
 
-	<profiles>
-		<profile>
-			<activation>
-				<property>
-					<name>shade</name>
-				</property>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-shade-plugin</artifactId>
-						<version>3.0.0</version>
-						<executions>
-							<execution>
-								<phase>package</phase>
-								<goals>
-									<goal>shade</goal>
-								</goals>
-								<configuration>
-									<finalName>TestDrools</finalName>
-									<transformers>
-										<transformer
-											implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
-										</transformer>
-										<!-- <transformer implementation="org.springframework.boot.maven.PropertiesMergingResourceTransformer"> 
-											</transformer> -->
-										<transformer
-											implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
-										</transformer>
-										<transformer
-											implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-											<manifestEntries>
-												<Main-Class>com.caili314.sample.drools.TestDrools</Main-Class>
-											</manifestEntries>
-										</transformer>
-									</transformers>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
 </project>

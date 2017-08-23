@@ -1,0 +1,16 @@
+package sample1;
+
+global org.slf4j.Logger log;
+
+rule "买2个A和4个B送2个C"
+when
+	$linea: OrderLine(productId=="A", $qtya: qty>=2)
+	$lineb: OrderLine(productId=="B", $qtyb: qty>=4)
+then
+	modify($linea){setQty($qtya-2);}
+	modify($lineb){setQty($qtyb-4);}
+	log.info("Rule applied: {}", drools.getRule().getName());
+	log.info("\tA: {}", $linea);
+	log.info("\tB: {}", $lineb);
+	log.info("\t送2个C");
+end
